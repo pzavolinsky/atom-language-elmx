@@ -1,12 +1,27 @@
 'use babel';
 
-const path = require("path");
-const fs = require("fs");
-const linterPath = atom.packages.resolvePackagePath('linter-elm-make');
-const elmLinter = linterPath && require(linterPath+'/lib/linter-elm-make.js');
+const path = require('path');
+const fs = require('fs');
+const R = require('ramda');
 const parse = require('elmx');
 
-const R = require('ramda');
+// === CONFIG ============================================================== //
+const config = {
+  elmxCompile: {
+    title: 'Compile `file.elmx` into `file.elm` in the same directory and retain the compiled file.',
+    description: 'If set to `true`, will create a `.elm` file in the same directory where `.elmx` is and will not remove the `.elm` file after linting. Otherwise ti will create a temp file while linting and then remove the file.',
+    type: 'boolean',
+    default: true
+  }
+};
+
+// === AUTOCOMPLETE========================================================= //
+const langPath = atom.packages.resolvePackagePath('language-elm');
+const autocompleteProviders = langPath && require(langPath).provide() || [];
+
+// === LINTER ============================================================== //
+const linterPath = atom.packages.resolvePackagePath('linter-elm-make');
+const elmLinter = linterPath && require(linterPath+'/lib/linter-elm-make.js');
 
 const mapError = R.curry((filePath, error) => R.merge(error, {
   filePath,
@@ -21,15 +36,16 @@ const removeFile = R.curry((filePath, arg) => {
   return arg;
 });
 
+const log = s => {
+  atom.notifications.addInfo('!!!', {
+    detail: JSON.stringify(s, undefined, 2),
+    dismissable: true
+  });
+  return s;
+}
+
 module.exports = {
-  config: {
-    elmxCompile: {
-      title: 'Compile `file.elmx` into `file.elm` in the same directory and retain the compiled file.',
-      description: 'If set to `true`, will create a `.elm` file in the same directory where `.elmx` is and will not remove the `.elm` file after linting. Otherwise ti will create a temp file while linting and then remove the file.',
-      type: 'boolean',
-      default: true
-    }
-  },
+  config,
   activate() {
     if (!elmLinter) return;
     elmLinter.activate();
@@ -76,6 +92,11 @@ module.exports = {
         }
       }
     };
+  },
+  provide() {
+    return R.map(
+      R.flip(R.merge)({ selector: '.source.elm.elmx' }),
+      autocompleteProviders);
   }
 };
 
