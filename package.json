@@ -1,14 +1,30 @@
 {
   "name": "language-elmx",
-  "version": "0.1.0",
   "main": "index.js",
-  "description": "Syntax highlighting and lint for the language Elm extended with embedded HTML (ElmX)",
+  "version": "1.0.0",
+  "description": "Syntax highlighting, autocomplete and lint for the Elm language extended with embedded HTML (elmx)",
+  "keywords": [
+    "ide-haskell",
+    "ide",
+    "haskell",
+    "ghc-mod",
+    "backend"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pzavolinsky/atom-language-elmx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pzavolinsky/atom-language-elmx/issues"
+  },
+  "homepage": "https://github.com/pzavolinsky/atom-language-elmx",
+  "author": "Patricio Zavolinsky",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0"
   },
   "dependencies": {
-    "elmx": "file:///home/pzavolinsky/src/lab/elmx/elmx",
+    "elmx": "^1.0.0",
     "fs": "0.0.2",
     "path": "^0.12.7",
     "ramda": "^0.19.1"
