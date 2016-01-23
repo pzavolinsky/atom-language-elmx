@@ -1,0 +1,130 @@
+'name': 'ElmX'
+'scopeName': 'source.elm.elmx'
+'fileTypes': [
+  'elmx'
+]
+'patterns': [
+  {
+    'include': '#elmx'
+  }
+  {
+    'include': 'source.elm'
+  }
+]
+'repository':
+  'pcdata':
+    'patterns': [
+      {
+        'include': '#pcdata-quotes'
+      }
+    ]
+  'elmx-tag-attributes':
+    'patterns': [
+      {
+        'include': '#elmx-tag-attribute-name'
+      }
+      {
+        'include': '#elmx-string-double-quoted'
+      }
+      {
+        'include': '#elmx-string-single-quoted'
+      }
+      {
+        'include': '#elmx-evaluated-code'
+      }
+    ]
+  'elmx-tag-attribute-name':
+    'name': 'meta.tag.attribute-name.elm.elmx'
+    'match': '\\b([a-zA-Z0-9\\-:]+)'
+    'captures':
+      '1':
+        'name': 'entity.other.attribute-name.elm.elmx'
+  'elmx-string-double-quoted':
+    'begin': '"'
+    'end': '"'
+    'name': 'string.quoted.double.elm.elmx'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elm.elmx'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elm.elmx'
+  'elmx-string-single-quoted':
+    'begin': '\''
+    'end': '\''
+    'name': 'string.quoted.single.elm.elmx'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elm.elmx'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elm.elmx'
+  'elmx-evaluated-code':
+    'begin': '{'
+    'end': '}'
+    'name': 'meta.brace.curly.elm.elmx'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.brace.curly.end.elm.elmx'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.brace.curly.start.elm.elmx'
+    'patterns': [
+      {
+        'include': 'source.elm'
+      }
+    ]
+  'elmx-tag-content':
+    'begin': '(/?>)'
+    'end': '(?=</?[a-zA-Z0-9\.:$_]+)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.definition.tag.end.elm.elmx'
+    'patterns': [
+      {
+        'include': '#elmx-evaluated-code'
+      }
+    ]
+  'elmx-tag-open':
+    'begin': '(<)([a-zA-Z0-9\.:$_]+)'
+    'end': '(?=/?>)'
+    'name': 'tag.open.elm.elmx'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.definition.tag.begin.elm.elmx'
+      '2':
+        'name': 'entity.name.tag.elm.elmx'
+    'patterns': [
+      {
+        'include': '#elmx-tag-attributes'
+      }
+    ]
+  'elmx-tag-close':
+    'match': '(</)([^>]+)(>)'
+    'name': 'tag.closed.elm.elmx'
+    'captures':
+      '1':
+        'name': 'punctuation.definition.tag.begin.elm.elmx'
+      '2':
+        'name': 'entity.name.tag.elm.elmx'
+      '3':
+        'name': 'punctuation.definition.tag.end.elm.elmx'
+  'elmx-tag-invalid':
+    'name': 'invalid.illegal.tag.incomplete.elm.elmx'
+    'match': '<\\s*>'
+  'elmx':
+    'name': 'meta.elm.elmx'
+    'patterns': [
+      {
+        'include': '#elmx-tag-open'
+      }
+      {
+        'include': '#elmx-tag-content'
+      }
+      {
+        'include': '#elmx-tag-close'
+      }
+      {
+        'include': '#elmx-tag-invalid'
+      }
+    ]

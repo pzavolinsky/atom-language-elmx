@@ -1,0 +1,23 @@
+{
+  "name": "language-elmx",
+  "version": "0.1.0",
+  "main": "index.js",
+  "description": "Syntax highlighting and lint for the language Elm extended with embedded HTML (ElmX)",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0"
+  },
+  "dependencies": {
+    "elmx": "file:///home/pzavolinsky/src/lab/elmx/elmx",
+    "fs": "0.0.2",
+    "path": "^0.12.7",
+    "ramda": "^0.19.1"
+  },
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  }
+}
