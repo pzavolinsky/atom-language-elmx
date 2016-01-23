@@ -36,14 +36,6 @@ const removeFile = R.curry((filePath, arg) => {
   return arg;
 });
 
-const log = s => {
-  atom.notifications.addInfo('!!!', {
-    detail: JSON.stringify(s, undefined, 2),
-    dismissable: true
-  });
-  return s;
-}
-
 module.exports = {
   config,
   activate() {
