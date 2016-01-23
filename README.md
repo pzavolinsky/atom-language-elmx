@@ -1,4 +1,4 @@
-# language-elm Atom package
+# language-elmx Atom package
 
 Syntax highlighting, auto-completion and lint for the Elm language extended with embedded HTML ([elmx](https://github.com/pzavolinsky/elmx)).
 
