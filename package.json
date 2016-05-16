@@ -4,11 +4,9 @@
   "version": "1.2.1",
   "description": "Syntax highlighting, autocomplete and lint for the Elm language extended with embedded HTML (elmx)",
   "keywords": [
-    "ide-haskell",
-    "ide",
-    "haskell",
-    "ghc-mod",
-    "backend"
+    "language",
+    "elm",
+    "elmx"
   ],
   "repository": {
     "type": "git",
