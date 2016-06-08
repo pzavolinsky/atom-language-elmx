@@ -75,7 +75,7 @@
       }
     ]
   'elmx-tag-content':
-    'begin': '(/?>)'
+    'begin': '(?<=\\S)(/?>)'
     'end': '(?=</?[a-zA-Z0-9\.:$_]+)'
     'beginCaptures':
       '1':

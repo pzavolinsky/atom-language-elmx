@@ -25,7 +25,7 @@ const elmLinter = linterPath && require(linterPath+'/lib/linter-elm-make.js');
 
 const mapError = filePath => error => R.merge(error, {
   filePath,
-  range: {
+  range: error.range && error.range.start && {
     start: {
       row: error.range.start.row,
       column: 0
