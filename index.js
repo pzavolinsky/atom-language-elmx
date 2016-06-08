@@ -23,13 +23,19 @@ const autocompleteProviders = langPath && require(langPath).provide() || [];
 const linterPath = atom.packages.resolvePackagePath('linter-elm-make');
 const elmLinter = linterPath && require(linterPath+'/lib/linter-elm-make.js');
 
-const mapError = R.curry((filePath, error) => R.merge(error, {
+const mapError = filePath => error => R.merge(error, {
   filePath,
-  range: [
-    [error.range[0][0], 0],
-    [error.range[1][0], 80]
-  ]
-}));
+  range: {
+    start: {
+      row: error.range.start.row,
+      column: 0
+    },
+    end: {
+      row: error.range.end.row,
+      column: 80
+    }
+  }
+});
 
 const removeFile = R.curry((filePath, arg) => {
   fs.unlinkSync(filePath);
@@ -74,7 +80,11 @@ module.exports = {
 
         try {
           return linter
-            .lint({ getPath: () => newFilePath })
+            .lint({
+              getPath: () => newFilePath,
+              getText: () => elmContent,
+              getTextInBufferRange: () => ''
+            })
             .then(rs => rs.map(mapError(filePath)))
             .then(deleteFile, deleteFile);
         }
