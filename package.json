@@ -1,7 +1,7 @@
 {
   "name": "language-elmx",
   "main": "index.js",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Syntax highlighting, autocomplete and lint for the Elm language extended with embedded HTML (elmx)",
   "keywords": [
     "language",
