@@ -38,7 +38,9 @@ const mapError = filePath => error => R.merge(error, {
 });
 
 const removeFile = R.curry((filePath, arg) => {
-  fs.unlinkSync(filePath);
+  if (fs.exists(filePath)) {
+    fs.unlinkSync(filePath);
+  }
   return arg;
 });
 

@@ -1,7 +1,7 @@
 {
   "name": "language-elmx",
   "main": "index.js",
-  "version": "1.2.9",
+  "version": "2.0.0",
   "description": "Syntax highlighting, autocomplete and lint for the Elm language extended with embedded HTML (elmx)",
   "keywords": [
     "language",
@@ -22,7 +22,7 @@
     "atom": ">=1.0.0"
   },
   "dependencies": {
-    "elmx": "^1.0.8",
+    "elmx": "^2.0.0",
     "fs": "0.0.2",
     "path": "^0.12.7",
     "ramda": "^0.19.1"
